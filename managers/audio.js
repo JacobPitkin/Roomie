@@ -106,6 +106,9 @@ const stop = async (interaction) => {
 
 const volume = async (interaction) => {
   const volume = interaction.options.getInteger('volume');
+
+  if (volume > 100 || volume < 0) return interaction.reply({ content: 'Volume can only be set to values 0-100.', ephemeral: true });
+
   audioQueue.setVolume(volume);
   interaction.reply({ content: `Volume has been set to ${volume}`, ephemeral: true });
   return await interaction.channel.send(`Player volume has been set to ${volume}`);
